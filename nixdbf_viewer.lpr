@@ -235,7 +235,7 @@ begin
   //Application.Title:='NixDBF Viewer';
   //Application.Run;
   //Application.Free;
-  Application.Title:='NixDBF Viewer';
+  //Application.Title:='NixDBF Viewer';
   Application.Init;
   // MessageBox('Hello World !', nil, mfOKButton);
   Application.Run;   // Wen es weiter gehen soll.
