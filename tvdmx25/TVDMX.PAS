@@ -385,7 +385,8 @@ begin
     If (Link^.Delta.X + Size.X > Len) then
       fillchar(A[succ(Len - Link^.Delta.X)],(Size.X + Link^.Delta.X - Len), ' ');
     end;
-  A[0] := chr(lo(Size.X));
+  //A[0] := chr(lo(Size.X));
+  SetLength(A, lo(Size.X));
   MoveStr(B, A, GetColor(1));
   If (Link^.Origin.Y <= Origin.Y) then i := pred(Size.Y) else i := 0;
   WriteLine(0, i, Size.X, 1, B);
@@ -407,7 +408,8 @@ var
   A		: string;
   B		: TDrawBuffer;
 begin
-  If (longint(Size) = 0) or (Link = nil) or (Link^.DMXfield1 = nil) then Exit;
+  //If (longint(Size) = 0) or (Link = nil) or (Link^.DMXfield1 = nil) then Exit;
+  If ((Size.X = 0) and (Size.Y = 0)) or (Link = nil) or (Link^.DMXfield1 = nil) then Exit;
   fieldrec  := Link^.LeftField;
   If (fieldrec = nil) or (fieldrec^.screentab > Link^.Delta.X) then
     fieldrec := Link^.DMXfield1;
@@ -432,8 +434,10 @@ begin
 	begin
 	If access and accDelimiter <> 0 then
 	  begin
-	  If fieldrec^.typecode = 'º' then char(B[X]) := Markers[Mk + 2]
-	   else If fieldrec^.typecode = '³' then char(B[X]) := Markers[Mk];
+	  //If fieldrec^.typecode = 'º' then char(B[X]) := Markers[Mk + 2]
+	  // else If fieldrec^.typecode = '³' then char(B[X]) := Markers[Mk];
+	  If fieldrec^.typecode = 'º' then B[X] := Word(Markers[Mk + 2])
+	   else If fieldrec^.typecode = '³' then B[X] := Word(Markers[Mk]);
 	  Inc(X);
 	  end
 	 else
