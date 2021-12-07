@@ -1,0 +1,373 @@
+
+    tvDMX has had several changes from version 1.0 through 2.5.
+    Not all of the documentation has been updated, but these notes
+    cover the most prominent changes.
+
+
+FORMSHOP DEMO
+═════════════
+
+  Previous versions of FORMSHOP.PAS did not always compile with BP7
+  because BP7's capacity for generating recursive NewSItems in single
+  statements was limited.
+
+  This was remedied by splitting NewSItem lists into several functions.
+  See FORMSHOP.PAS if you have large forms.
+
+
+RECORD and FIELD SELECTION
+══════════════════════════
+
+  As described in the other documentation files, the TDmxEditor's
+  RecordSelected and FieldSelected fields indicate whether a record or
+  field is selected and highlighted.  In the past, both the record and
+  field have always been selected while the view's state was sfFocused
+  (except during field and record movement, or while changing size).
+
+  Selection status is now determined by the sfActive and sfSelected
+  states.  This allows a record to be selected, when a field is not.
+  In an active window with several views, the current record will stay
+  selected even when the field is deselected (via EvaluateField) as the
+  user tabs to the next view.  EvaluateRecord is only called when the
+  sfActive state changes; the view size changes; or the cursor moves up
+  or down.
+
+  Remember: The SetupRecord, SetupField, EvaluateField and EvaluateRecord
+  methods are called internally.  You may intercept them by overriding
+  these virtual methods (provided that they call the inherited methods),
+  but your program should not call them directly.
+
+  It should be noted here that most programmers will not be affected by
+  this change.
+
+
+FIELD HIGHLIGHTING
+══════════════════
+
+  After making the preceding change, it was then reasonable to highlight
+  the current field position after the field itself becomes deselected.
+  This might be desirable in a window with several selectable views.
+
+  You can now accomplish this by setting:
+
+	ShowFmt := ShowFmt + [showCurrentField];
+
+  showCurrentField is defined in DMXGIZMA.PAS; and ShowFmt is a field of
+  object TDmxScroller in tvDMX.PAS.
+
+
+FUNCTION ENTRYBOX()
+═══════════════════
+
+  The concept of Turbo Vision's MessageBox and InputBox functions has
+  inspired a form-like version in the DMXFORMS.PAS unit.
+
+      function EntryBox(Title: string;		// dialog box title
+			AData: pointer;		// form's data
+			AOptions: word;		// mfXXXX codes
+			AForm: PSItem		// form template list
+			) : word;		// dialog box result
+
+  Example:
+
+      procedure EditEntryBox;
+      var  Code: integer;
+      begin
+	Code := EntryBox('Entry Box', @DataRec, mfOKCancel or mfDefault,
+			NewSItem('',
+			NewSItem('~    Name~',
+			NewSItem( '   \sssssssssssssssssssssssss',
+			NewSItem('',
+			NewSItem('~    SSN:    ~\###-##-####',
+			NewSItem('',
+			NewSItem('~    Balance:~\($rrr,rrr.zz)',
+			NewSItem('',
+				nil))))))))
+		);
+	If (Code = cmOK) then ProcessDataRec;
+      end;
+
+  The example creates a dialog box with OK and Cancel buttons, using
+  data from a record called DataRec.
+
+  Many rows and fields can be added, making the window as elaborate as
+  required.  Scroll-bars will be added to the window if its height or
+  width are too large for the template design.
+
+  New EntryBox options:
+
+	mfHelpButton = $0004;	// adds a "Help" button, with cmHelp
+	mfViewOnly   = $0008;	// for viewing data only; no user entry
+	mfDefault    = $0010;	// makes OK button the cmDefault command
+
+  Any mfXXXX button code (from MSGBOX.PAS) may be used to add buttons
+  to EntryBox, but the title codes (eg: mfError, mfInformation, etc.)
+  are not needed --and would conflict with new EntryBox options.
+
+  The EntryBox procedure itself is fairly small.  Most of the work is
+  done by procedure MakeEntryBox.  This is important in that MakeEntryBox
+  may also to design special entry boxes using descendants of TDialog.
+
+
+
+    These are the primary changes from version 1.x to 2.0.
+
+
+UNIT tvDMXBUF RECORD NUMBERS
+════════════════════════════
+
+  Function SeekRec() in unit tvDMXBUF uses a LONGINT value as a parameter,
+  where it had previously used an INTEGER.  This still needs more work
+  before it can be extended to long databases.  Look for updates in a
+  future version.
+
+
+REAL NUMBER FORMATS
+═══════════════════
+
+  tvDMX real numbers were originally displayed with trailing zeroes, eg:
+  'rrr,rrr.rrr' could format 10000 as ' 10,000.000'.  This has been changed
+  to make trailing zeroes optional, eg: ' 10,000    '.
+
+  You can still display trailing zeroes using the 'Z' template codes, eg:
+  'rrr,rrr.zzz'.
+
+
+FORM-STYLE DATA ENTRY
+═════════════════════
+
+  The new TDmxForm object uses templates to create forms, just like its
+  parent, but it gets the templates in a list of strings, like this:
+
+    Templates :=
+	NewSItem ('~    Data Entry Form~',
+	NewSItem ('',
+	NewSItem ('~Name: ~\ SSSSSSSSSSSSSSSSSS\~Age:~\WWW',
+	NewSItem ('~Balance:~\($rrr,rrr.zz)\~    APR:~\WZW%',
+	NewSItem ('',
+	NewSItem ('~     SSN:~\###-##-####',
+		nil))))));
+
+  And this is the record type defined by those templates:
+
+    TRecordType	  =  RECORD
+	Name	:  string [18];
+	Age	:  word;
+	Balance	:  real;
+	APR	:  word;
+	SSN	:  string [9];
+    end;
+
+  Tilde symbols ('~') mark off string-literals;  backslashes ('\') are
+  separate fields;  and everything else defines the field.  Naturally, you
+  need to be careful about marking these properly, but it's fairly easy.
+
+  If your view had scrollbars, you can create huge scrollable data windows.
+
+CREATING EXTRA-LONG TEMPLATES
+══════════════════════════════
+
+    Before now, record templates wider than 255 characters could only
+    be created by overriding the InitStruct() method.  This effort was
+    always complicated, and usually application-specific.
+
+    Two new functions (in unit DMXGIZMA) provide two easy ways to extend
+    a template string:
+
+
+  function InitAppendFields (ATemplate : pstring) : DmxIDstr;
+	(*type DmxIDstr is a seven-character string)
+
+    Example:
+
+      const
+	  TT : string [xx] = ' ssssssssssssss|wwww|wwww|';
+	  T2 : string [xx] = ' wwww|wwww|sssssssssssssss|[x]|';
+
+      begin
+	TT := TT + InitAppendFields (@T2);
+	...
+
+    InitAppendFields() creates a seven-byte string that contains a
+    control code which indicates to tvDMX that a pointer to another
+    template string is following.  Very long template codes can be
+    created by concatenating these strings, eg:
+
+	TT := TT + InitAppendFields (@T2) + InitAppendFields (@T3);
+
+    Extremely long template codes can be created by nesting.
+
+	T3 := T3 + InitAppendFields (@T4);
+	T2 := T2 + InitAppendFields (@T3);
+	TT := TT + InitAppendFields (@T2);
+
+    TT can then be used as your tvDMX template string.
+
+
+
+  function InitTSItemFields (ATemplates : PSItem) : DmxIDstr;
+
+    This function initializes a chain of TSItem templates, which will be
+    interpreted as one long tvDMX template chain.
+
+    Example:
+
+	TT := ' sssssssssssssss|WW,WWW |'
+		+ InitTSItemFields (NewSItem (' sssssssssss`sssssssss|',
+				    NewSItem ('($rrr,rrr.rr)|',
+				    NewSItem (' CCCCC|WWW,WWW |',
+				    nil))))
+
+    TT can then be used as your tvDMX template string.  It is much easier
+    to use function InitTSItemFields() than InitAppendFields().
+
+ENUMERATED FIELDS
+═════════════════
+
+    Enum fields are byte fields that restricts the user to several
+    choices.  They use the NewSItem() function from the OBJECTS unit
+    to construct the list which is passed to tvDMX in the form of a
+    DmxIDstr (which is a seven character string) that is created by
+    this function (in unit DMXGIZMA):
+
+      function  InitEnumField (ShowZ : boolean; AccMode,Default : byte;
+			       AItems : PSItem) : DmxIDstr;
+
+    ShowZ specifies whether ShowZeroes should be set for this field;
+    AccMode is the field's access mode (accSkip, accReadOnly, etc.);
+    Default is the field's default value (normally zero).
+
+    Example:
+
+	TT := T1 + InitEnumField (FALSE, 0,0,
+			NewSItem (' Zero',
+			NewSItem (' One',
+			NewSItem (' Two',
+			NewSItem (' Three',
+			NewSItem (' Four',
+				 nil)))))
+				);
+
+    Important:  The TSItem list is disposed by tvDMX when the view is
+    disposed.  You should call InitEnumField() to create the list each
+    time that the view is created.  And please note that enum fields
+    are still in the experimental stage.
+
+    The following procedures and functions (in DMXGIZMA) were written to
+    work with TSItem lists:
+
+
+      procedure DisposeSItems (AItems : PSItem);
+	  dispose a chain of TSItems
+
+      function  ReadSItems (var S : TStream) : PSItem;
+	  reads strings from a pick list
+
+      procedure WriteSItems (var S : TStream; Items : PSItem);
+	  writes strings to a pick list
+
+      function  MaxItemStrLen (AItems : PSItem) : integer;
+	  returns the maximum length of the strings in a pick list
+
+      function  SItemsLen (S : PSItem) : integer;
+	  returns the cumulative length of the strings in a pick list
+
+
+ABBREVIATING STRING FIELDS
+══════════════════════════
+
+    String fields can now be abbreviated with the '`' character (the
+    backward apostrophe) so that long strings don't take up so much
+    space on the screen.  While editing, users can scroll within the
+    field.  Example:
+
+      ' ssssssssssssssssssss`ssssssssssssssssssss| ww,www '
+
+    This will be displayed like this:
+
+      ' International Busin^|  1,024 '
+
+
+
+
+
+tvDMX AUXILIARY VIEWS
+═════════════════════
+
+    tvDMX versions prior to 2.0 came with only one view to display the
+    titles or field names above the scroller.  Since version 2.0 made
+    wide data editors easier to produce, the same needed to be done for
+    TDmxLabel objects --so several derivations were created.
+
+                               ┌─────────────┐
+                               │   TObject   │
+                               └──────┬──────┘
+                               ┌──────┴──────┐
+                               │    TView    │
+                               └──────┬──────┘
+                                      │
+                            ┌─────────┴─────────┐
+                            │     TDmxLink      │
+                            │   (unit tvDMX)    │
+                            └─────────┬─────────┘
+                                      │
+                         ┌────────────┴────────────┐
+               ┌─────────┴─────────┐     ┌─────────┴─────────┐
+               │   TDmxExpLabels   │     │    TDmxRecInd     │
+               │   (unit tvDMX)    │     │   (unit tvDMX)    │
+               └─────────┬─────────┘     └─────────┬─────────┘
+                         │               ┌─────────┴─────────┐
+                         │               │   TDmxExpRecInd   │
+                         │               │  (unit tvDMXBUF)  │
+                         │               └───────────────────┘
+            ┌────────────┴──────────┬───────────────────────┐
+            │                       │                       │
+  ┌─────────┴─────────┐   ┌─────────┴─────────┐   ┌─────────┴─────────┐
+  │    TDmxLabels     │   │    TDmxFLabels    │   │    TDmxMLabels    │
+  │   (unit tvDMX)    │   │   (unit tvDMX)    │   │   (unit tvDMX)    │
+  └───────────────────┘   └───────────────────┘   └───────────────────┘
+
+
+                                     ...continued on next page
+
+tvDMX AUXILIARY VIEWS (continued)
+═════════════════════
+
+    Note:  Examples of New(P) would be used as functions, not as procedures.
+
+  TDmxExtLabels	=  OBJECT (TDmxLink)
+    Descendant of TDmxLink, and parent to TDmxLabels that displays the
+    labels line on the first line of the window.  Its constructor is given
+    a pointer to the text of the labels line.
+
+    Example:  New (PDmxExtLabels, Init (sizeof(LblArr), @LblArr, Bounds));
+
+
+  TDmxLabels	=  OBJECT (TDmxExtLabels)
+    Default tvDMX labels object.  Its constructor is given a pointer to
+    the string for the field labels.
+
+    Example:  New (PDmxLabels, Init (@LabelStr, Bounds));
+
+
+  TDmxFLabels	=  OBJECT (TDmxExtLabels)
+    Alternative to TDmxLabels with a constructor that is given the actual
+    string itself for the text of the labels line.
+
+    Example:  New (PDmxFLabels, Init (' Name    ID  SSN  ', Bounds));
+
+
+  TDmxMLabels	=  OBJECT (TDmxExtLabels)
+    Can be used to display DMX labels that must be longer than 255
+    characters, but is more convenient to set up than TDmxExtLabels.
+
+    Example:  New (PDmxMLabels, Init (
+                         NewSItem ('Name            ',
+                         NewSItem ('ID      SSN          ',
+                         NewSItem ('Balance       ',
+                         nil))),
+                       Bounds));
+
+    A working example of TDmxMLabels is demonstrated in WIDESHOP.PAS.
+
+
