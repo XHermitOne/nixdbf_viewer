@@ -106,7 +106,8 @@ Call trace for block $0005D210 size 200
 
 program nixdbf_viewer;
 
-{$mode objfpc}{$H+}
+{$mode Delphi}{$H+}
+//{$mode objfpc}{$H+}
 
 uses
   //{$IFDEF UNIX}{$IFDEF UseCThreads}
@@ -117,18 +118,99 @@ uses
   Objects,
   Drivers,        // Hotkey
   Views,
-  Menus
+  Menus,
+  RSET,
+  STDDMX,
+  TVGIZMA,
+  TVDMX,
+  DMXGIZMA,
+  Avail, DMXFORMS
   //Objects, Drivers, Views, Editors, Menus, Dialogs, App,             { Standard GFV units }
   //FVConsts, AsciiTab,
   //Gadgets, TimedDlg, MsgBox, StdDlg,
   //Classes, SysUtils, CustApp
   { you can add units after this };
 
+const
+    cmAbout	  =  101;
+    cmHasDialog   =  103;
+
+    cmAccounts	  =  111;
+    cmPayroll	  =  112;
+    cmBusy	  =  113;
+    cmHex	  =  114;
+    cmInvoice	  =  115;
+    cmDialog	  =  116;
+    cmRecDialog   =  117;
+    cmPrint	  =  118;
+
+    hcDeskTop	  = 1100;
+    hcAccWin	  = 1100;
+    hcPayWin	  = 1200;
+    hcBusyWin	  = 1300;
+    hcHexWin	  = 1400;
+    hcInvoiceWin  = 1500;
+    hcDialogs	  = 4000;
+    hcMenus	  = 50000;
+
+    hcReadOnly	  = 1500;
+    hcEnumField	  = 1501;
+
+    hcMain	  = hcMenus;
+    hcAccounts	  = hcMain + 1;
+    hcPayroll	  = hcMain + 2;
+    hcBusy	  = hcMain + 3;
+    hcHex	  = hcMain + 4;
+    hcInvoice	  = hcMain + 5;
+    hcDialog	  = hcMain + 6;
+    hcPrint	  = hcMain + 7;
+
+    hcWindow	  = hcMain + 10;
+    hcUserScr	  = hcWindow + 1;
+
+    hcOptions	  = hcMain + 20;
+    hcSound	  = hcOptions + 1;
+    hcVideo	  = hcOptions + 2;
+    hcPrnOpt	  = hcOptions + 3;
+
+const
+    AccountLabel : string =
+	' Transaction          Debit        Credit      [?] ';
+
+    AccountInfo  : string =
+	' SSSSSSSSSSSSSSSS`SSSSSSSSSS| rrr,rrr.zz  | rrr,rrr.zz  | [x] ';
+
 type
+  PDmxEditTbl	   = ^TDmxEditTbl;
+  TDmxEditTbl     =  OBJECT(TDmxEditor)
+    function	GetHelpCtx : word;  VIRTUAL;
+    procedure HandleEvent(var Event: TEvent);  VIRTUAL;
+    procedure SetState(AState: word; Enable: boolean);  VIRTUAL;
+    function  Valid(Command: word) : boolean;  VIRTUAL;
+  end;
+
+  PDmxEditTblWin = ^TDmxEditTblWin;
+  TDmxEditTblWin  =  OBJECT(TDmxWindow)
+    procedure InitDMX(ATemplate: string;  var AData;
+      		ALabels,ARecInd: PDmxLink;
+      		BSize: longint);  VIRTUAL;
+  end;
+
+  PAccount	  = ^TAccount;
+  TAccount	  =  RECORD
+	Account	:  string;
+	Debit	:  TREALNUM;
+	Credit	:  TREALNUM;
+	Status	:  boolean;
+  end;
+
   { TNixDBFViewerApplication }
   TNixDBFViewerApplication = object(TApplication)
     procedure  InitStatusLine;  virtual;         // Status Line
     procedure InitMenuBar; virtual;              // Menu
+
+    procedure TableWindow;
+
   //protected
   //  procedure DoRun; override;
   //
@@ -137,6 +219,12 @@ type
   //  destructor Destroy; override;
   //  procedure WriteHelp; virtual;
   end;
+
+const
+    MaxRecordNum  =   49;
+
+var
+  Accounts	:  array[0..MaxRecordNum] of TAccount;
 
 { TNixDBFViewerApplication }
 procedure TNixDBFViewerApplication.InitStatusLine;
@@ -170,6 +258,24 @@ begin
                                                          cmQuit,
                                                          hcNoContext,
                   nil)), nil))));
+end;
+
+procedure TNixDBFViewerApplication.TableWindow;
+var
+  R	: TRect;
+  W	: PDmxWindow;
+begin
+  AssignWinRect(R, length(AccountLabel) + 2, 0);
+  W := New(PDmxEditTblWin, Init(R,	{ window rectangle }
+		'Accounts',		{ window title }
+		wnNextAvail,		{ window number }
+		AccountInfo,		{ template string }
+		Accounts,		{ data records }
+		sizeof(Accounts),	{ data size }
+		AccountLabel,		{ heading label }
+		7));			{ indicator width }
+  W^.HelpCtx := hcAccWin;
+  DeskTop^.Insert(ValidView(W));
 end;
 
 //procedure TNixDBFViewerApplication.DoRun;
@@ -227,6 +333,85 @@ end;
 ////                                       nil)))) ;
 ////
 ////end;
+
+{ == TDmxEditTbl ======================================================= }
+function TDmxEditTbl.GetHelpCtx : word;
+begin
+  If (CurrentField^.typecode = fldENUM) then
+    GetHelpCtx := hcEnumField
+  else
+  If (CurrentField^.access and accReadOnly <> 0) then
+    GetHelpCtx := hcReadOnly
+  else
+    GetHelpCtx := HelpCtx;
+end;
+
+
+procedure TDmxEditTbl.HandleEvent(var Event: TEvent);
+begin
+  TDmxEditor.HandleEvent(Event);
+  With Event do
+    If (What = evCommand) then
+    begin
+      Case Command of
+        cmDialog,cmDMX_DoubleClick:
+          Message(Application, evCommand, cmRecDialog, @Self);
+        cmHasDialog:
+          begin end;  { just allow this event to clear }
+      else	Exit;
+      end;
+      ClearEvent(Event);
+    end;
+end;
+
+
+procedure TDmxEditTbl.SetState(AState: word; Enable: boolean);
+begin
+  TDmxEditor.SetState(AState, Enable);
+  If (AState and sfActive <> 0) then
+  begin
+    If Enable then EnableCommands([cmDialog]) else DisableCommands([cmDialog]);
+  end;
+end;
+
+
+function  TDmxEditTbl.Valid(Command: word) : boolean;
+var
+  V	: boolean;
+begin
+  V := TDmxEditor.Valid(Command);
+  If not V and
+    ((Command = cmDMX_ZeroizeField) or (Command = cmDMX_ZeroizeRecord))
+  then
+    If (MessageBox('Records has READ-ONLY fields.'^M
+      	 + 'Should a partial erase be performed?',
+      	nil, mfError or mfYesButton or mfNoButton) = cmYes) then V := TRUE;
+  Valid := V;
+end;
+
+{ == TDmxEditTblWin ==================================================== }
+
+
+procedure TDmxEditTblWin.InitDMX(ATemplate: string;  var AData;
+      			  ALabels,ARecInd: PDmxLink;
+      			  BSize: longint);
+{ To override TDmxEditor (as does object TDmxEditTbl above), you could
+override a TDmxWindow object to insert the new object.  This window
+type is used for the "Accounts" and "Busy" windows.  (The "Payroll"
+window uses a regular TWindow type.)
+}
+var
+  R	: TRect;
+begin
+  GetExtent(R);
+  R.Grow(-1,-1);
+  If ALabels <> nil then Inc(R.A.Y, ALabels^.Size.Y);
+  DMX := New(PDmxEditTbl, Init(ATemplate, AData, BSize, R,
+       	     ALabels, ARecInd,
+      	     StandardScrollBar(sbHorizontal),
+      	     StandardScrollBar(sbVertical)));
+  Insert(DMX);
+end;
 
 var
   Application: TNixDBFViewerApplication;

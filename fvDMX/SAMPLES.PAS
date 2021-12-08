@@ -1,5 +1,5 @@
 
-{þþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþ}
+{โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– }
 {							}
 {	SAMPLES   --Multi-window sample demo program	}
 {	tvDMX	  --data editing project (ver 2.x)	}
@@ -9,7 +9,7 @@
 {				Orlando, FL 32856	}
 {				CIS:  72361,753		}
 {							}
-{þþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþþ}
+{โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– โ– }
 
 Program SAMPLES;
 
@@ -123,7 +123,7 @@ const
     hcPrnOpt	  = hcOptions + 3;
 
 
-  { ออ Accounts template and data structure ออออออออออออออออออออออออออออออ }
+  { โ•โ• Accounts template and data structure โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 const
     AccountLabel : string[80] =
@@ -144,13 +144,13 @@ type
     end;
 
 
-  { ออ Payroll template and data structure อออออออออออออออออออออออออออออออ }
+  { โ•โ• Payroll template and data structure โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 const { The last three fields are marked READ-ONLY, and are automatically
 	entered by the virtual methods in object TDmxPayroll. }
 
     PayrollLblA  = ' Employee                ID     Earnings       FICA        FITW        SITW   ';
-    PayrollInfo  = ' ssssssssssssssssssssss| ZZW บ $rr,rrr.zz | $r,rrr.zz '^R'| $r,rrr.zz '^R'| $r,rrr.zz '^R;
+    PayrollInfo  = ' ssssssssssssssssssssss| ZZW โ•‘ $rr,rrr.zz | $r,rrr.zz '^R'| $r,rrr.zz '^R'| $r,rrr.zz '^R;
     PayrollLblB  = ' (dollar amounts are dependent upon Earnings)';
 
 type
@@ -165,7 +165,7 @@ type
     end;
 
 
-  { ออ Busy data structure อออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• Busy data structure โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 const { The Busy Window's template uses many of the special options.  Since
 	it uses an enumerated field, the template is defined in the method
@@ -192,7 +192,7 @@ type
     end;
 
 
-  { ออ Invoice data structure ออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• Invoice data structure โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
       { The Invoice Window is a TDmxForm-descendant, so its template uses
 	is built by nested NewSItem() calls.  See function InvoiceForm(). }
@@ -239,7 +239,7 @@ type
     end;
 
 
-  { ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 type
@@ -319,7 +319,7 @@ var
   procedure InitializeData;  forward;  { for the sample data }
 
 
-  { ออ TMyStatusLine อออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TMyStatusLine โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 function  TMyStatusLine.Hint(AHelpCtx: word) : string;
@@ -358,7 +358,7 @@ begin
 end;
 
 
-  { ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 function  InvoiceForm : PSItem;
@@ -376,12 +376,12 @@ function  InvoiceForm : PSItem;
 	NewSItem('~    CIS: 72361,753                           ~\sssssssssssssssssssssssss',
 	NewSItem('~                                             ~\sssssssssssssssssssssssss',
 	NewSItem('',
-	NewSItem('~                ฐฐฐฐฐ   ฐฐ     ฐฐ ฐฐ   ฐฐ~',
-	NewSItem('~   ฐฐ            ฐฐ ฐฐ  ฐฐฐ   ฐฐฐ  ฐฐ ฐฐ    Contact individual:~',
-	NewSItem('~  ฐฐฐฐฐ ฐฐ   ฐฐ  ฐฐ  ฐฐ ฐฐฐฐ ฐฐฐฐ   ฐฐฐ      ~\sssssssssssssssssssssssss',
-	NewSItem('~   ฐฐ    ฐฐ ฐฐ   ฐฐ  ฐฐ ฐฐ ฐฐฐ ฐฐ   ฐฐฐ      ~\sssssssssssssssssssssssss',
-	NewSItem('~   ฐฐ     ฐฐฐ    ฐฐ  ฐฐ ฐฐ  ฐ  ฐฐ  ฐฐ ฐฐ~',
-	NewSItem('~    ฐฐ     ฐ    ฐฐฐฐฐฐ  ฐฐ     ฐฐ ฐฐ   ฐฐ~',
+	NewSItem('~                โ–‘โ–‘โ–‘โ–‘โ–‘   โ–‘โ–‘     โ–‘โ–‘ โ–‘โ–‘   โ–‘โ–‘~',
+	NewSItem('~   โ–‘โ–‘            โ–‘โ–‘ โ–‘โ–‘  โ–‘โ–‘โ–‘   โ–‘โ–‘โ–‘  โ–‘โ–‘ โ–‘โ–‘    Contact individual:~',
+	NewSItem('~  โ–‘โ–‘โ–‘โ–‘โ–‘ โ–‘โ–‘   โ–‘โ–‘  โ–‘โ–‘  โ–‘โ–‘ โ–‘โ–‘โ–‘โ–‘ โ–‘โ–‘โ–‘โ–‘   โ–‘โ–‘โ–‘      ~\sssssssssssssssssssssssss',
+	NewSItem('~   โ–‘โ–‘    โ–‘โ–‘ โ–‘โ–‘   โ–‘โ–‘  โ–‘โ–‘ โ–‘โ–‘ โ–‘โ–‘โ–‘ โ–‘โ–‘   โ–‘โ–‘โ–‘      ~\sssssssssssssssssssssssss',
+	NewSItem('~   โ–‘โ–‘     โ–‘โ–‘โ–‘    โ–‘โ–‘  โ–‘โ–‘ โ–‘โ–‘  โ–‘  โ–‘โ–‘  โ–‘โ–‘ โ–‘โ–‘~',
+	NewSItem('~    โ–‘โ–‘     โ–‘    โ–‘โ–‘โ–‘โ–‘โ–‘โ–‘  โ–‘โ–‘     โ–‘โ–‘ โ–‘โ–‘   โ–‘โ–‘~',
 		Next))))))))))))));
     end;
 
@@ -424,7 +424,7 @@ function  InvoiceForm : PSItem;
     begin
       ClientInfo :=
 	NewSItem('~  Client Information (Optional)~',
-	NewSItem('~  ออออออออออออออออออ~',
+	NewSItem('~  โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•~',
 	NewSItem('',
 	NewSItem('~    How long have you been using Turbo Vision?~\ W '#0'~years ~\WW '^U#11#0'~months~',
 	NewSItem('',
@@ -462,7 +462,7 @@ begin
 end;
 
 
-  { ออ TDmxInvoice อออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TDmxInvoice โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 procedure TDmxInvoice.EvaluateField;
@@ -521,7 +521,7 @@ begin
 end;
 
 
-  { ออ TDmxEditTbl อออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TDmxEditTbl โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 function  TDmxEditTbl.GetHelpCtx : word;
@@ -578,7 +578,7 @@ begin
 end;
 
 
-  { ออ TDmxEditTblWin ออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TDmxEditTblWin โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 procedure TDmxEditTblWin.InitDMX(ATemplate: string;  var AData;
@@ -602,7 +602,7 @@ begin
 end;
 
 
-  { ออ TDmxPayroll อออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TDmxPayroll โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 procedure TDmxPayroll.EvaluateField;
@@ -639,7 +639,7 @@ begin
 end;
 
 
-  { ออ TMyApp ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ• TMyApp โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 constructor TMyApp.Init;
@@ -1051,12 +1051,12 @@ begin
   If (EntryBox('Employee Record #'+A, P^.RecordData, mfOKCancel,
 	NewSItem(^A,
 	NewSItem('~      Name~',
-	NewSItem('~    ~\ ssssssssssssssssssssss'#0'Ü  ',
-	NewSItem('~      ฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿~',
-	NewSItem('~      ID Number: ~\ ZZW '#0'Ü ',
-	NewSItem('~                   ฿฿฿฿฿~',
-	NewSItem('~      Earnings:~\ $rr,rrr.zz ' + #0'Ü '#0'r'^H#0'r'^H#0'r'^H,
-	NewSItem('~                 ฿฿฿฿฿฿฿฿฿฿฿฿~',
+	NewSItem('~    ~\ ssssssssssssssssssssss'#0'โ–  ',
+	NewSItem('~      โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
+	NewSItem('~      ID Number: ~\ ZZW '#0'โ– ',
+	NewSItem('~                   โ–€โ–€โ–€โ–€โ–€~',
+	NewSItem('~      Earnings:~\ $rr,rrr.zz ' + #0'โ– '#0'r'^H#0'r'^H#0'r'^H,
+	NewSItem('~                 โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
 		 nil))))))))
 	) = cmOK)
 	then
@@ -1074,25 +1074,25 @@ begin
   If (EntryBox('Record #'+A, P^.RecordData, mfOKCancel,
 	NewSItem(^A'B'^H,  { this is a hidden BYTE field }
 	NewSItem('~      Name~',
-	NewSItem('~    ~\ ssssssssssssssssssssssssssssss'#0'Ü  ',
-	NewSItem('~      ฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿~',
-	NewSItem('    ~SSN:     ~\ ###-##-#### '#0'Ü',
-	NewSItem('~               ฿฿฿฿฿฿฿฿฿฿฿฿฿~',
-	NewSItem('    ~Balance: ~\($rrr,rrr.zz)'#0'Ü',
-	NewSItem('~               ฿฿฿฿฿฿฿฿฿฿฿฿฿~',
+	NewSItem('~    ~\ ssssssssssssssssssssssssssssss'#0'โ–  ',
+	NewSItem('~      โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
+	NewSItem('    ~SSN:     ~\ ###-##-#### '#0'โ–',
+	NewSItem('~               โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
+	NewSItem('    ~Balance: ~\($rrr,rrr.zz)'#0'โ–',
+	NewSItem('~               โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
 	NewSItem('~              Date         Time~',
 	NewSItem('~          ~\' + fldDATETIME,
 	NewSItem('',
-	NewSItem('~    Integer [A]: ~\iii '^R^S#0'~Ü (skip field)~',
-	NewSItem('~    Integer <B>: ~\iii '#0'Û',
-	NewSItem('~                   ฿฿฿฿~',
-	NewSItem('~    Pointer: ~\ HHHH:HHHH '#0'Ü',
-	NewSItem('~               ฿฿฿฿฿฿฿฿฿฿฿~',
+	NewSItem('~    Integer [A]: ~\iii '^R^S#0'~โ– (skip field)~',
+	NewSItem('~    Integer <B>: ~\iii '#0'โ–',
+	NewSItem('~                   โ–€โ–€โ–€โ–€~',
+	NewSItem('~    Pointer: ~\ HHHH:HHHH '#0'โ–',
+	NewSItem('~               โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
 	NewSItem('~           Value~',
-	NewSItem('~        ~\RRR,RRR.ZZRR ~pts~ '#0'Ü',
-	NewSItem('~          ฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿฿~',
-	NewSItem('~        Read-Only: ~\ HH '^R+#0'Ü',
-	NewSItem('~                     ฿฿฿฿~',
+	NewSItem('~        ~\RRR,RRR.ZZRR ~pts~ '#0'โ–',
+	NewSItem('~          โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€โ–€~',
+	NewSItem('~        Read-Only: ~\ HH '^R+#0'โ–',
+	NewSItem('~                     โ–€โ–€โ–€โ–€~',
 		 nil)))))))))))))))))))))
 	) = cmOK)
 	then
@@ -1100,7 +1100,7 @@ begin
 end;
 
 
-  { ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 
 procedure InitializeData;
@@ -1250,7 +1250,7 @@ begin
 end;
 
 
-  { ออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออออ }
+  { โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ•โ• }
 
 var  MyApp  : TMyApp;
 

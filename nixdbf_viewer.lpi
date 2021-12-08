@@ -23,11 +23,44 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="1">
+    <Units Count="8">
       <Unit0>
         <Filename Value="nixdbf_viewer.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
+      <Unit1>
+        <Filename Value="fvDMX/DMXGIZMA.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="fvDMX/TVDMX.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tvDMX"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="fvDMX/avail.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Avail"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="fvDMX/DMXFORMS.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="fvDMX/TVGIZMA.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tvGIZMA"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="fvDMX/STDDMX.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StdDMX"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="fvDMX/RSET.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RSet"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -37,8 +70,14 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="fvDMX"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="DelphiUnicode"/>
+      </SyntaxOptions>
+    </Parsing>
     <Linking>
       <Debugging>
         <UseHeaptrc Value="True"/>

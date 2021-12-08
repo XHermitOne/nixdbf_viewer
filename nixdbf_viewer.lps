@@ -3,28 +3,28 @@
   <ProjectSession>
     <Version Value="11"/>
     <BuildModes Active="Default"/>
-    <Units Count="9">
+    <Units Count="25">
       <Unit0>
         <Filename Value="nixdbf_viewer.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="214"/>
-        <CursorPos X="40" Y="238"/>
-        <UsageCount Value="22"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="107"/>
+        <CursorPos X="17" Y="127"/>
+        <UsageCount Value="66"/>
       </Unit0>
       <Unit1>
         <Filename Value="tvdmx25/COLLECTR.PAS"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="52"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
       </Unit1>
       <Unit2>
         <Filename Value="tvdmx25/DMXGIZMA.PAS"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="796"/>
         <CursorPos X="16" Y="811"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="7"/>
       </Unit2>
       <Unit3>
         <Filename Value="/usr/share/fpcsrc/3.0.4/packages/fv/src/dialogs.pas"/>
@@ -32,7 +32,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="143"/>
         <CursorPos X="4" Y="158"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="7"/>
       </Unit3>
       <Unit4>
         <Filename Value="tvdmx25/TVDMX.PAS"/>
@@ -40,23 +40,23 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="513"/>
         <CursorPos X="7" Y="528"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="7"/>
       </Unit4>
       <Unit5>
         <Filename Value="/usr/share/fpcsrc/3.0.4/packages/fv/src/views.pas"/>
         <UnitName Value="Views"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="269"/>
-        <CursorPos X="4" Y="284"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="535"/>
+        <CursorPos X="19" Y="551"/>
+        <UsageCount Value="7"/>
       </Unit5>
       <Unit6>
         <Filename Value="/usr/share/fpcsrc/3.0.4/packages/rtl-extra/src/inc/objects.pp"/>
         <UnitName Value="Objects"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="188"/>
-        <CursorPos X="4" Y="203"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="222"/>
+        <CursorPos X="4" Y="229"/>
+        <UsageCount Value="8"/>
       </Unit6>
       <Unit7>
         <Filename Value="tvdmx25/RSET.PAS"/>
@@ -64,16 +64,145 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="18"/>
         <CursorPos X="5" Y="33"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
       </Unit7>
       <Unit8>
         <Filename Value="tvDMX/DMXFORMS.PAS"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="6"/>
         <CursorPos X="27" Y="21"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="6"/>
       </Unit8>
+      <Unit9>
+        <Filename Value="tvDMX/TVDMX.PAS"/>
+        <UnitName Value="tvDMX"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="73"/>
+        <UsageCount Value="6"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="fvDMX/DMXGIZMA.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="10"/>
+        <UsageCount Value="21"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="fvDMX/TVDMX.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tvDMX"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4"/>
+        <CursorPos Y="17"/>
+        <UsageCount Value="21"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="fvDMX/avail.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Avail"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9"/>
+        <CursorPos X="44" Y="30"/>
+        <UsageCount Value="21"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="/usr/share/fpcsrc/3.0.4/packages/fv/src/drivers.pas"/>
+        <UnitName Value="Drivers"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="544"/>
+        <CursorPos X="11" Y="559"/>
+        <UsageCount Value="7"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="/usr/share/fpcsrc/3.0.4/rtl/inc/systemh.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="94"/>
+        <CursorPos X="3" Y="109"/>
+        <UsageCount Value="6"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="fvDMX/DMXFORMS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="19"/>
+        <UsageCount Value="20"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="/usr/share/fpcsrc/3.0.4/packages/fv/src/memory.pas"/>
+        <UnitName Value="Memory"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="421"/>
+        <CursorPos X="14" Y="441"/>
+        <UsageCount Value="7"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="fvDMX/TVGIZMA.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tvGIZMA"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="26"/>
+        <CursorPos X="5" Y="77"/>
+        <UsageCount Value="22"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="/usr/share/fpcsrc/3.0.4/packages/rtl-console/src/inc/videoh.inc"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="3" Y="16"/>
+        <UsageCount Value="7"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="/usr/share/fpcsrc/3.0.4/packages/fv/src/app.pas"/>
+        <UnitName Value="App"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="242"/>
+        <CursorPos X="19" Y="257"/>
+        <UsageCount Value="7"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="fvDMX/STDDMX.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StdDMX"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="12"/>
+        <CursorPos X="35" Y="14"/>
+        <UsageCount Value="22"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="fvDMX/TVDMXBUF.PAS"/>
+        <UnitName Value="tvDMXBUF"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos Y="19"/>
+        <UsageCount Value="7"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="fvDMX/TVDMXCOL.PAS"/>
+        <UnitName Value="tvDMXCOL"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="6"/>
+        <CursorPos Y="19"/>
+        <UsageCount Value="7"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="fvDMX/TVDMXREP.PAS"/>
+        <UnitName Value="tvDMXREP"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="249"/>
+        <CursorPos X="85" Y="254"/>
+        <UsageCount Value="7"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="fvDMX/RSET.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RSet"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4"/>
+        <CursorPos X="8" Y="13"/>
+        <UsageCount Value="22"/>
+      </Unit24>
     </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="-1"/>
+    </General>
     <JumpHistory HistoryIndex="-1"/>
     <RunParams>
       <FormatVersion Value="2"/>

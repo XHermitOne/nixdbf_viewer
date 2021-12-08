@@ -27,7 +27,9 @@
 }
 
 unit Avail;
-{$mode objfpc}{$H+}
+
+{$mode Delphi}{$H+}
+//{$mode objfpc}{$H+}
 
 interface
 
